@@ -1,0 +1,68 @@
+button > span:first-child {
+	font-size: 1.25rem;
+}
+
+.primary-fab-1,
+.tertiary-fab-1,
+.error-fab-1 {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	border-radius: 0.5rem;
+	font-size: 0.75rem;
+	font-weight: bold;
+	width: 60px;
+	height: 60px;
+	gap: 0.5rem;
+	box-shadow: var(--elevation-2);
+}
+
+.primary-fab-1 > span,
+.tertiary-fab-1 > span,
+.error-fab-1 > span {
+	font-size: 1.5rem;
+}
+
+.primary-fab-1 {
+	background-color: var(--primary-container);
+	color: var(--on-primary-container);
+}
+
+.tertiary-fab-1 {
+	background-color: var(--tertiary-container);
+	color: var(--on-tertiary-container);
+}
+
+.error-fab-1 {
+	background-color: var(--error-container);
+	color: var(--on-error-container);
+}
+
+.primary-btn-1,
+.error-btn-1,
+.error-btn-2 {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	gap: 0.5rem;
+	padding: 0.75rem 1rem;
+	border-radius: 0.25rem;
+	font-weight: bold;
+}
+
+.primary-btn-1 {
+	background-color: var(--primary);
+	color: var(--on-primary);
+}
+
+.error-btn-1 {
+	background-color: var(--error);
+	color: var(--on-error);
+}
+
+.error-btn-2 {
+	background-color: var(--error-container);
+	border: 2px solid var(--error);
+	color: var(--error);
+}
