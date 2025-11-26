@@ -1,3 +1,219 @@
+/* #region CSS Resets */
+
+a {
+	text-decoration: none;
+	color: inherit;
+}
+
+button,
+dialog {
+	outline: none;
+	border: none;
+}
+
+dialog::backdrop {
+	background-color: var(--scrim);
+	opacity: 60%;
+}
+
+h2,
+h3,
+p {
+	margin: 0;
+	padding: 0;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+fieldset {
+	border: 0;
+	margin: 0;
+	padding: 0;
+	min-width: 0;
+}
+
+/* #endregion CSS Resets */
+
+:root {
+	font-family: "Raleway", system-ui, "Segoe UI", Roboto, Helvetica, Arial,
+		sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+	color: var(--on-surface);
+
+	/* ---- Elevation styles ---- */
+	--elevation-1: 0px 1px 2px rgba(0, 0, 0, 0.12),
+		0px 1px 3px rgba(0, 0, 0, 0.08);
+	--elevation-2: 0px 2px 4px rgba(0, 0, 0, 0.12),
+		0px 3px 6px rgba(0, 0, 0, 0.08);
+	--elevation-3: 0px 4px 8px rgba(0, 0, 0, 0.12),
+		0px 6px 12px rgba(0, 0, 0, 0.08);
+	--elevation-4: 0px 6px 12px rgba(0, 0, 0, 0.14),
+		0px 10px 16px rgba(0, 0, 0, 0.1);
+	--elevation-5: 0px 8px 16px rgba(0, 0, 0, 0.16),
+		0px 14px 20px rgba(0, 0, 0, 0.12);
+}
+
+.material-symbols-filled {
+	font-variation-settings: "FILL" 1, "wght" 400;
+	font-size: 24px;
+}
+
 body {
+	background-color: var(--surface);
+}
+
+main {
+	padding: 0 1rem;
+}
+
+main > h1 {
+	color: var(--primary);
+	text-align: center;
+	text-shadow: var(--elevation-1);
+}
+
+main > .main-btn-container {
+	display: flex;
+	gap: 0.5rem;
+	justify-content: center;
+}
+
+.todos-container {
+	margin-top: 3rem;
+}
+
+.todos-container > .todos-table:not(:first-of-type) {
+	margin-top: 1.25rem;
+}
+
+.todos-container > .high-priority {
+	border: 1px solid var(--error);
+}
+
+.todos-container > .normal-priority {
+	border: 1px solid var(--primary);
+}
+
+.todos-container > .low-priority {
+	border: 1px solid var(--secondary);
+}
+
+.todos-table {
+	height: 260px;
+	background-color: var(--surface-container-lowest);
+	/* border-radius: 0.25rem; */
+	box-shadow: var(--elevation-1);
+	overflow-x: scroll;
+}
+
+.todos-table > h2 {
+	width: 100%;
+	font-size: 1rem;
+	padding: 0.5rem;
+}
+
+.todos-table > h2.high {
+	background-color: var(--error);
+	color: var(--on-error);
+}
+
+.todos-table > h2.normal {
 	background-color: var(--primary);
+	color: var(--on-primary);
+}
+
+.todos-table > h2.low {
+	background-color: var(--secondary);
+	color: var(--on-secondary);
+}
+
+.todos-table > .table-scroll {
+	overflow-x: scroll;
+}
+
+.todos-table table {
+	width: 100%;
+	height: max-content;
+	table-layout: fixed;
+}
+
+.todos-table table > thead {
+	background-color: rgba(200, 197, 208, 0.3);
+}
+
+.todos-table table th {
+	color: var(--outline);
+	padding: 0.5rem;
+	height: fit-content;
+	text-align: left;
+	vertical-align: middle;
+	white-space: nowrap;
+}
+
+.todos-table table thead > tr > th:first-child {
+	text-align: center;
+	width: 3rem;
+}
+
+/* Name header */
+.todos-table table thead > tr > th:nth-child(2),
+.todos-table table thead > tr > th:last-child {
+	width: 160px;
+}
+
+/* Priority Header */
+/* Due date Header */
+.todos-table table thead > tr > th:nth-child(3),
+.todos-table table thead > tr > th:last-child {
+	width: 100px;
+}
+
+/* Description header */
+.todos-table table thead > tr > th:nth-child(4) {
+	width: 300px;
+}
+
+.todos-table table tbody tr {
+	vertical-align: top;
+}
+
+.todos-table table tbody tr > td {
+	padding: 0.5rem;
+}
+
+.todos-table table tbody tr > td:first-child {
+	text-align: center;
+}
+
+.todos-table table tbody tr > td > .status-checkbox {
+	height: 1rem;
+	width: 1rem;
+	cursor: pointer;
+}
+
+.todos-table table tbody tr > td > span {
+	font-size: 1rem;
+}
+
+td > span.high {
+	color: var(--error);
+}
+
+footer {
+	margin-top: 3rem;
+	background-color: var(--primary-container);
+	color: var(--on-primary-container);
+	padding: 0.5rem 1rem;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.copyright,
+.author-link {
+	display: flex;
+	align-items: center;
+	gap: 0.25rem;
+	font-weight: bold;
 }
