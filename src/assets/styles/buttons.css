@@ -23,6 +23,11 @@ button > span:first-child {
 	color: var(--on-primary-container);
 }
 
+.secondary-fab-1 {
+	background-color: var(--secondary-container);
+	color: var(--on-secondary-container);
+}
+
 .tertiary-fab-1 {
 	background-color: var(--tertiary-container);
 	color: var(--on-tertiary-container);

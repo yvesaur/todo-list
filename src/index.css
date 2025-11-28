@@ -208,6 +208,7 @@ footer {
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
+	box-shadow: var(--elevation-2);
 }
 
 .copyright,
@@ -221,7 +222,7 @@ footer {
 /* Small Devices */
 @media (width >= 40rem) {
 	main {
-		width: 90dvw;
+		width: 90vw;
 		padding: 0;
 		border: 1px solid red;
 		margin: auto;
@@ -240,5 +241,27 @@ footer {
 	footer {
 		font-size: 1.25rem;
 		padding: 1rem;
+	}
+}
+
+/* Large Devices */
+@media (width >= 64rem) {
+	main {
+		width: 70vw;
+	}
+}
+
+/* Extra Large Devices */
+@media (width >= 80rem) {
+	main {
+		width: 60vw;
+	}
+
+	.todos-table {
+		height: 400px;
+	}
+
+	footer {
+		padding: 1rem 1.5rem;
 	}
 }

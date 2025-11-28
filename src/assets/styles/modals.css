@@ -1,6 +1,6 @@
 main > .dialog-form {
 	background-color: var(--surface-container-lowest);
-	width: 90%;
+	width: 90vw;
 	padding: 1rem;
 	border-radius: 0.5rem;
 	box-shadow: var(--elevation-1);
@@ -71,7 +71,7 @@ main > .dialog-form {
 /* Small Devices */
 @media (width >= 40rem) {
 	main > .dialog-form {
-		width: 80%;
+		width: 80vw;
 	}
 
 	.dialog-form > form > h3 {
@@ -86,6 +86,20 @@ main > .dialog-form {
 /* Medium Devices */
 @media (width >= 48rem) {
 	main > .dialog-form {
-		width: 70%;
+		width: 70vw;
+	}
+}
+
+/* Large Devices */
+@media (width >= 64rem) {
+	main > .dialog-form {
+		width: 50vw;
+	}
+}
+
+/* Extra Large Devices */
+@media (width >= 80rem) {
+	main > .dialog-form {
+		width: 40vw;
 	}
 }
