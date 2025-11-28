@@ -18,15 +18,14 @@ button > span:first-child {
 	box-shadow: var(--elevation-2);
 }
 
-.primary-fab-1 > span,
-.tertiary-fab-1 > span,
-.error-fab-1 > span {
-	font-size: 1.5rem;
-}
-
 .primary-fab-1 {
 	background-color: var(--primary-container);
 	color: var(--on-primary-container);
+}
+
+.secondary-fab-1 {
+	background-color: var(--secondary-container);
+	color: var(--on-secondary-container);
 }
 
 .tertiary-fab-1 {
@@ -65,4 +64,21 @@ button > span:first-child {
 	background-color: var(--error-container);
 	border: 2px solid var(--error);
 	color: var(--error);
+}
+
+/* Small Devices */
+@media (width >= 40rem) {
+	.primary-fab-1,
+	.tertiary-fab-1,
+	.error-fab-1 {
+		font-size: 1rem;
+		width: 70px;
+		height: 70px;
+	}
+
+	button.primary-fab-1 > span,
+	button.tertiary-fab-1 > span,
+	button.error-fab-1 > span {
+		font-size: 1.5rem;
+	}
 }

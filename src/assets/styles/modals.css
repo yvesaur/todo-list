@@ -1,6 +1,6 @@
 main > .dialog-form {
 	background-color: var(--surface-container-lowest);
-	width: 90%;
+	width: 90vw;
 	padding: 1rem;
 	border-radius: 0.5rem;
 	box-shadow: var(--elevation-1);
@@ -16,6 +16,7 @@ main > .dialog-form {
 	gap: 0.5rem;
 }
 
+/* H3 tag icon */
 .dialog-form > form > h3 > span:first-child {
 	font-size: 1.5rem;
 }
@@ -65,4 +66,47 @@ main > .dialog-form {
 /* Button Icon */
 .add-todo-form > .form-btn-container button > span:first-child {
 	font-size: 1.5rem;
+}
+
+/* Small Devices */
+@media (width >= 40rem) {
+	main > .dialog-form {
+		width: 80vw;
+	}
+
+	.dialog-form > form > h3 {
+		font-size: 1.5rem;
+	}
+
+	.dialog-form > form > h3 > span:first-child {
+		font-size: 1.75rem;
+	}
+}
+
+/* Medium Devices */
+@media (width >= 48rem) {
+	main > .dialog-form {
+		width: 70vw;
+	}
+}
+
+/* Large Devices */
+@media (width >= 64rem) {
+	main > .dialog-form {
+		width: 50vw;
+	}
+}
+
+/* Extra Large Devices */
+@media (width >= 80rem) {
+	main > .dialog-form {
+		width: 40vw;
+	}
+}
+
+/* 2XL Devices */
+@media (width >= 96rem) {
+	main > .dialog-form {
+		width: 30vw;
+	}
 }
