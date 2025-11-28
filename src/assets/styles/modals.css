@@ -82,3 +82,10 @@ main > .dialog-form {
 		font-size: 1.75rem;
 	}
 }
+
+/* Medium Devices */
+@media (width >= 48rem) {
+	main > .dialog-form {
+		width: 70%;
+	}
+}
