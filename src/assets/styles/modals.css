@@ -16,6 +16,7 @@ main > .dialog-form {
 	gap: 0.5rem;
 }
 
+/* H3 tag icon */
 .dialog-form > form > h3 > span:first-child {
 	font-size: 1.5rem;
 }
@@ -65,4 +66,19 @@ main > .dialog-form {
 /* Button Icon */
 .add-todo-form > .form-btn-container button > span:first-child {
 	font-size: 1.5rem;
+}
+
+/* Small Devices */
+@media (width >= 40rem) {
+	main > .dialog-form {
+		width: 80%;
+	}
+
+	.dialog-form > form > h3 {
+		font-size: 1.5rem;
+	}
+
+	.dialog-form > form > h3 > span:first-child {
+		font-size: 1.75rem;
+	}
 }
