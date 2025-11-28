@@ -103,3 +103,10 @@ main > .dialog-form {
 		width: 40vw;
 	}
 }
+
+/* 2XL Devices */
+@media (width >= 96rem) {
+	main > .dialog-form {
+		width: 30vw;
+	}
+}

@@ -265,3 +265,14 @@ footer {
 		padding: 1rem 1.5rem;
 	}
 }
+
+/* 2XL Devices */
+@media (width >= 96rem) {
+	main {
+		width: 50vw;
+	}
+
+	.todos-table {
+		width: 640px;
+	}
+}
