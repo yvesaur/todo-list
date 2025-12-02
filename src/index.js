@@ -7,14 +7,17 @@ import "./index.css";
 import DomHandler from "./modules/DomHandler";
 import TodoHandler from "./modules/TodoHandler";
 import TodoLocalStorageHandler from "./modules/TodoLocalStorageHandler";
-import "./scripts/addTodo";
+import "./scripts/todoFormInputValidation";
 
 const todoHandler = new TodoHandler();
 const domHandler = new DomHandler();
 
 TodoLocalStorageHandler.initTodosToLocalStorage();
 domHandler.initTodosTableItems();
+domHandler.initFABEventListeners();
+domHandler.initToDoFormEventListeners();
 
+window.todoHandler = todoHandler;
 window.TodoLocalStorageHandler = TodoLocalStorageHandler;
 window.domHandler = domHandler;
 

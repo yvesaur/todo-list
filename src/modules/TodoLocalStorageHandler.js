@@ -52,18 +52,22 @@ class TodoLocalStorageHandler {
 	}
 
 	static updateTodosLocalItem(
-		todo_id,
+		target_index,
+		isDone,
 		new_name,
-		new_type,
+		new_priority,
 		new_due_date,
 		new_description
 	) {
 		let updated_local_todos = this.getTodosLocal();
 
-		updated_local_todos[todo_id].name = new_name;
-		updated_local_todos[todo_id].type = new_type;
-		updated_local_todos[todo_id].due_date = new_due_date;
-		updated_local_todos[todo_id].description = new_description;
+		console.log(updated_local_todos[target_index].name);
+
+		updated_local_todos[target_index].isDone = isDone;
+		updated_local_todos[target_index].name = new_name;
+		updated_local_todos[target_index].new_priority = new_priority;
+		updated_local_todos[target_index].due_date = new_due_date;
+		updated_local_todos[target_index].description = new_description;
 
 		this.updateTodosLocal(updated_local_todos);
 	}

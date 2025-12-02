@@ -26,7 +26,7 @@ class TodoItem {
 	}
 
 	#editPriority(new_priority) {
-		this.type = new_priority;
+		this.priority = new_priority;
 	}
 
 	#editDueDate(new_due_date) {
@@ -37,24 +37,16 @@ class TodoItem {
 		this.description = new_description;
 	}
 
-	completeToDo() {
-		this.isDone = true;
-	}
-
-	uncompleteToDo() {
-		this.isDone = false;
-	}
-
-	updateProperties(new_name, new_type, new_due_date, new_description) {
+	updateProperties(new_name, new_priority, new_due_date, new_description) {
 		this.#editName(new_name);
-		this.#editPriority(new_type);
+		this.#editPriority(new_priority);
 		this.#editDueDate(new_due_date);
 		this.#editDescription(new_description);
 
 		TodoLocalStorageHandler.updateTodosLocalItem(
 			this.id,
 			new_name,
-			new_type,
+			new_priority,
 			new_due_date,
 			new_description
 		);
