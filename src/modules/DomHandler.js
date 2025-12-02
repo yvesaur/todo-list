@@ -21,11 +21,10 @@ class DomHandler {
 		// initHighPriorityTodosTable();
 	}
 
-	addTodoItemToTable(todo_item_id, todo_data) {
-		console.log(todo_data);
+	addTodoItemToTable(todo_data) {
 		const table_row_structure = `								
 								<tr
-									data-id="${todo_item_id}"
+									data-id="${todo_data.id}"
 								>
 									<td>
 										<input
@@ -67,11 +66,14 @@ class DomHandler {
 		return this.PriorityFlagColor[priority.toUpperCase()];
 	}
 
-	initTodosTable() {
+	initTodosTableItems() {
 		if (TodoLocalStorageHandler.isTodosLocalExists()) {
-			console.log("Local Todos exists");
+			// console.log("Local Todos exists");
 			const local_todos = TodoLocalStorageHandler.getTodosLocal();
-			console.log(local_todos);
+
+			for (let i = 0; i < local_todos.length; i++) {
+				this.addTodoItemToTable(local_todos[i]);
+			}
 		} else {
 			console.log("Local Todos does not exists");
 		}

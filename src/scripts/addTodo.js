@@ -26,17 +26,20 @@ todo_modal_add_btn.addEventListener("click", (e) => {
 	e.preventDefault();
 
 	let todo_data = getAddTodoFormInputsData();
+	console.log("TODO INPUT DATA: ");
+	console.table(todo_data);
+	todo_data.id = todo_item_id;
 	todo_data.due_date = formatDateToString(todo_data.due_date);
 
 	if (validateTodoFormInputs(todo_data)) {
 		todoHandler.addTodo(
-			todo_item_id,
+			todo_data.id,
 			todo_data.name,
 			todo_data.priority,
 			todo_data.due_date,
 			todo_data.description
 		);
-		domHandler.addTodoItemToTable(todo_item_id, todo_data);
+		domHandler.addTodoItemToTable(todo_data);
 
 		add_todo_modal_form.reset();
 		add_todo_modal.close();

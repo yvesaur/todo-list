@@ -10,8 +10,8 @@ class TodoHandler {
 		}
 	}
 
-	addTodo(name, priority, due_date, description) {
-		this.#todos.push(new TodoItem(name, priority, due_date, description));
+	addTodo(id, name, priority, due_date, description) {
+		this.#todos.push(new TodoItem(id, name, priority, due_date, description));
 
 		TodoLocalStorageHandler.addTodoLocal(this.#todos);
 	}

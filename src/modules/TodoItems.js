@@ -6,10 +6,10 @@ class TodoItem {
 	dateCreated;
 	name;
 	priority;
-	due_Date;
+	due_date;
 	description;
 
-	constructor(id, name, priority, due_Date, description) {
+	constructor(id, name, priority, due_date, description) {
 		const now = new Date();
 
 		this.id = id;
@@ -17,7 +17,7 @@ class TodoItem {
 
 		this.name = name;
 		this.priority = priority;
-		this.due_Date = due_Date;
+		this.due_date = due_date;
 		this.description = description;
 	}
 
