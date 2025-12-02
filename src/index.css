@@ -163,10 +163,13 @@ main > .main-btn-container {
 }
 
 /* Priority Header */
-/* Due date Header */
-.todos-table table thead > tr > th:nth-child(3),
-.todos-table table thead > tr > th:last-child {
+.todos-table table thead > tr > th:nth-child(3) {
 	width: 100px;
+}
+
+/* Due date Header */
+.todos-table table thead > tr > th:last-child {
+	width: 160px;
 }
 
 /* Description header */

@@ -1,7 +1,7 @@
 import { stringify } from "uuid";
 
 class TodoLocalStorageHandler {
-	TODOS_LOCAL_NAME = "todos_local";
+	static TODOS_LOCAL_NAME = "todos_local";
 
 	constructor() {
 		if (!this.#isTodosLocalExists()) {
@@ -52,14 +52,14 @@ class TodoLocalStorageHandler {
 
 	static updateTodosLocalItem(
 		todo_id,
-		new_title,
+		new_name,
 		new_type,
 		new_due_date,
 		new_description
 	) {
 		let updated_local_todos = this.getTodosLocal();
 
-		updated_local_todos[todo_id].title = new_title;
+		updated_local_todos[todo_id].name = new_name;
 		updated_local_todos[todo_id].type = new_type;
 		updated_local_todos[todo_id].due_date = new_due_date;
 		updated_local_todos[todo_id].description = new_description;
