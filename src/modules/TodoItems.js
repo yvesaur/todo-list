@@ -1,29 +1,28 @@
-import { v4 as uuidv4 } from "uuid";
 import TodoLocalStorageHandler from "./TodoLocalStorageHandler";
 
 class TodoItem {
 	id;
 	isDone = false;
 	dateCreated;
-	title;
+	name;
 	priority;
-	dueDate;
+	due_date;
 	description;
 
-	constructor(title, priority, dueDate, description) {
+	constructor(id, name, priority, due_date, description) {
 		const now = new Date();
 
-		this.id = uuidv4();
+		this.id = id;
 		this.dateCreated = now.toLocaleDateString("en-US");
 
-		this.title = title;
+		this.name = name;
 		this.priority = priority;
-		this.dueDate = dueDate;
+		this.due_date = due_date;
 		this.description = description;
 	}
 
-	#editTitle(new_title) {
-		this.title = new_title;
+	#editName(new_name) {
+		this.name = new_name;
 	}
 
 	#editPriority(new_priority) {
@@ -31,7 +30,7 @@ class TodoItem {
 	}
 
 	#editDueDate(new_due_date) {
-		this.dueDate = new_due_date;
+		this.due_date = new_due_date;
 	}
 
 	#editDescription(new_description) {
@@ -46,15 +45,15 @@ class TodoItem {
 		this.isDone = false;
 	}
 
-	updateProperties(new_title, new_type, new_due_date, new_description) {
-		this.#editTitle(new_title);
+	updateProperties(new_name, new_type, new_due_date, new_description) {
+		this.#editName(new_name);
 		this.#editPriority(new_type);
 		this.#editDueDate(new_due_date);
 		this.#editDescription(new_description);
 
 		TodoLocalStorageHandler.updateTodosLocalItem(
 			this.id,
-			new_title,
+			new_name,
 			new_type,
 			new_due_date,
 			new_description

@@ -48,6 +48,10 @@ main > .dialog-form {
 	border-radius: 0.25rem;
 }
 
+.add-todo-form > fieldset > div > textarea {
+	resize: none;
+}
+
 .add-todo-form > .form-btn-container {
 	margin-top: 1.75rem;
 	display: flex;
