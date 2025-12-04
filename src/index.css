@@ -11,11 +11,6 @@ dialog {
 	border: none;
 }
 
-dialog::backdrop {
-	background-color: var(--scrim);
-	opacity: 60%;
-}
-
 h2,
 h3,
 p {
@@ -201,6 +196,15 @@ main > .main-btn-container {
 
 td > span.high {
 	color: var(--error);
+}
+
+.todos-table table .edit-todo-item-btn {
+	background-color: var(--tertiary-container);
+	color: var(--on-tertiary-container);
+	font-size: 1rem;
+	padding: 0.25rem;
+	border-radius: 0.25rem;
+	box-shadow: var(--elevation-1);
 }
 
 footer {

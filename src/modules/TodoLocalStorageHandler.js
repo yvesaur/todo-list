@@ -34,6 +34,13 @@ class TodoLocalStorageHandler {
 		return local_todos;
 	}
 
+	static getSingleTodoLocal(todo_id) {
+		const local_todos = JSON.parse(localStorage.getItem(this.TODOS_LOCAL_NAME));
+		const target_index = local_todos.findIndex((todo) => todo.id === todo_id);
+
+		return local_todos[target_index];
+	}
+
 	static updateTodosLocal(updated_local_todos) {
 		localStorage.setItem("todos_local", JSON.stringify(updated_local_todos));
 	}
@@ -52,18 +59,19 @@ class TodoLocalStorageHandler {
 	}
 
 	static updateTodosLocalItem(
-		target_index,
-		isDone,
+		target_id,
 		new_name,
 		new_priority,
 		new_due_date,
 		new_description
 	) {
 		let updated_local_todos = this.getTodosLocal();
+		const target_index = updated_local_todos.findIndex(
+			(todo) => todo.id === target_id
+		);
 
-		console.log(updated_local_todos[target_index].name);
+		console.log(updated_local_todos[target_index]);
 
-		updated_local_todos[target_index].isDone = isDone;
 		updated_local_todos[target_index].name = new_name;
 		updated_local_todos[target_index].new_priority = new_priority;
 		updated_local_todos[target_index].due_date = new_due_date;

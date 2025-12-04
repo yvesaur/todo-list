@@ -1,6 +1,6 @@
 import { checkIfDateIsInPast } from "../utils/date";
 
-function getAddTodoFormInputsData(form_element) {
+function getTodoFormInputsData(form_element) {
 	const formData = new FormData(form_element);
 
 	const data = Object.fromEntries(formData.entries());
@@ -51,7 +51,7 @@ function reportInputValidity(input_element, message) {
 }
 
 export {
-	getAddTodoFormInputsData,
+	getTodoFormInputsData,
 	isInputDateValid,
 	isInputPriorityValid,
 	validateTodoFormInputs,

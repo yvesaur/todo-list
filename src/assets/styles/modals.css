@@ -1,3 +1,8 @@
+dialog::backdrop {
+	background-color: var(--scrim);
+	opacity: 60%;
+}
+
 main > .dialog-form {
 	background-color: var(--surface-container-lowest);
 	width: 90vw;
@@ -28,47 +33,47 @@ main > .dialog-form {
 }
 
 /* Input containers */
-.add-todo-form > fieldset > div {
+.todo-form > fieldset > div {
 	display: flex;
 	gap: 2px;
 	flex-direction: column;
 }
 
-.add-todo-form > fieldset > div > label {
+.todo-form > fieldset > div > label {
 	font-size: 1rem;
 	color: var(--on-surface);
 }
 
-.add-todo-form > fieldset > div > input,
-.add-todo-form > fieldset > div > select,
-.add-todo-form > fieldset > div > textarea {
+.todo-form > fieldset > div > input,
+.todo-form > fieldset > div > select,
+.todo-form > fieldset > div > textarea {
 	font-size: 1rem;
 	padding: 0.5rem 0.25rem;
 	border: 1px solid var(--outline);
 	border-radius: 0.25rem;
 }
 
-.add-todo-form > fieldset > div > textarea {
+.todo-form > fieldset > div > textarea {
 	resize: none;
 }
 
-.add-todo-form > .form-btn-container {
+.todo-form > .form-btn-container {
 	margin-top: 1.75rem;
 	display: flex;
 	gap: 0.25rem;
 }
 
-.add-todo-form > .form-btn-container button {
+.todo-form > .form-btn-container button {
 	padding: 1rem;
 	width: 100%;
 }
 
-.add-todo-form > .form-btn-container button > span {
+.todo-form > .form-btn-container button > span {
 	font-size: 1.25rem;
 }
 
 /* Button Icon */
-.add-todo-form > .form-btn-container button > span:first-child {
+.todo-form > .form-btn-container button > span:first-child {
 	font-size: 1.5rem;
 }
 
