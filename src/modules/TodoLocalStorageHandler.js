@@ -1,4 +1,5 @@
 import { stringify } from "uuid";
+import TodoItem from "./TodoItems";
 
 class TodoLocalStorageHandler {
 	static TODOS_LOCAL_NAME = "todos_local";
@@ -45,17 +46,13 @@ class TodoLocalStorageHandler {
 		localStorage.setItem("todos_local", JSON.stringify(updated_local_todos));
 	}
 
-	static addTodoLocal(new_todos) {
-		this.updateTodosLocal(new_todos);
-	}
-
 	static deleteTodoLocal(todo_id) {
 		let local_todos = this.getTodosLocal();
 
 		const target_index = local_todos.findIndex((todo) => todo.id === todo_id);
 		if (target_index !== -1) local_todos.splice(target_index, 1);
 
-		localStorage.setItem(this.TODOS_LOCAL_NAME, JSON, stringify(local_todos));
+		this.updateTodosLocal(local_todos);
 	}
 
 	static updateTodosLocalItem(
@@ -70,12 +67,21 @@ class TodoLocalStorageHandler {
 			(todo) => todo.id === target_id
 		);
 
-		console.log(updated_local_todos[target_index]);
-
 		updated_local_todos[target_index].name = new_name;
 		updated_local_todos[target_index].new_priority = new_priority;
 		updated_local_todos[target_index].due_date = new_due_date;
 		updated_local_todos[target_index].description = new_description;
+
+		this.updateTodosLocal(updated_local_todos);
+	}
+
+	static updateTodosLocalItemStatus(todo_id, new_status) {
+		let updated_local_todos = this.getTodosLocal();
+		const target_index = updated_local_todos.findIndex(
+			(todo) => todo.id === todo_id
+		);
+
+		updated_local_todos[target_index].isDone = new_status;
 
 		this.updateTodosLocal(updated_local_todos);
 	}

@@ -7,6 +7,12 @@ import TodoLocalStorageHandler from "./TodoLocalStorageHandler";
 
 class DomHandler {
 	#currentUserMode = 0;
+	// #userModes = Object.freeze({
+	// 	0: "normal",
+	// 	1: "edit",
+	// 	2: "deletion",
+	// });
+
 	#target_todo_id;
 	#high_priority_todo_table = document.querySelector(
 		".high-priority table > tbody"
@@ -21,11 +27,6 @@ class DomHandler {
 		HIGH: "--error",
 		NORMAL: "--primary",
 		LOW: "--secondary",
-	});
-	#userModes = Object.freeze({
-		0: "normal",
-		1: "edit",
-		2: "deletion",
 	});
 	add_todo_btn = document.querySelector(".add-todo-btn");
 	add_todo_modal = document.querySelector(".add-todo-modal");
@@ -47,6 +48,8 @@ class DomHandler {
 		".todo-form.edit-todo .edit-btn"
 	);
 
+	delete_todo_btn = document.querySelector(".delete-todo-btn");
+
 	constructor() {}
 
 	switchToNormalMode() {
@@ -65,12 +68,6 @@ class DomHandler {
 		const table_row_structure = this.generateTableRowStructure(todo_data);
 
 		this.renderTodoItemToCorrectTable(todo_data.priority, table_row_structure);
-
-		if (this.#currentUserMode === 0) {
-			this.addEventListenerToToDoStatusCheckbox(todo_data.id);
-		} else if (this.#currentUserMode === 1) {
-			this.addEventListenerToToDoItemsEditBtn(todo_data.id);
-		}
 	}
 
 	generateTableRowStructure(todo_data) {
@@ -103,7 +100,7 @@ class DomHandler {
 									<td>${todo_data.due_date}</td>
 								</tr>
 			`;
-		} else {
+		} else if (this.#currentUserMode === 1) {
 			return `
 								<tr
 									data-id="${todo_data.id}"
@@ -131,14 +128,38 @@ class DomHandler {
 									<td>${todo_data.due_date}</td>
 								</tr>
 			`;
+		} else {
+			return `
+								<tr
+									data-id="${todo_data.id}"
+								>
+									<td>
+										<button
+											data-id="${todo_data.id}"
+											class="material-symbols-outlined delete-todo-item-btn">
+											delete
+										</button>
+									</td>
+									<td>${todo_data.name}</td>
+									<td>
+										<span
+											class="material-symbols-outlined high"
+											style="font-variation-settings: 'FILL' 1;
+											color: var(${this.changePriorityFlagColor(todo_data.priority)})"
+											>flag_2</span
+										>
+										${toCapitalizeFirstLetter(todo_data.priority)}
+									</td>
+									<td>
+										${todo_data.description}
+									</td>
+									<td>${todo_data.due_date}</td>
+								</tr>
+			`;
 		}
 	}
 
 	renderTodoItemToCorrectTable(priority, table_row_structure) {
-		this.sortTodoItemToCorrectTable(priority, table_row_structure);
-	}
-
-	sortTodoItemToCorrectTable(priority, table_row_structure) {
 		if (priority === "high") {
 			this.#high_priority_todo_table.innerHTML += table_row_structure;
 		} else if (priority === "normal") {
@@ -159,8 +180,11 @@ class DomHandler {
 	}
 
 	initFABEventListeners() {
-		this.add_todo_btn.addEventListener("click", (e) => {
-			e.preventDefault();
+		this.add_todo_btn.addEventListener("click", () => {
+			this.switchToNormalMode();
+			this.clearTodoTableContents();
+			this.initTodosTableItems();
+
 			this.add_todo_modal.showModal();
 			document.body.style.overflow = "hidden";
 		});
@@ -171,13 +195,23 @@ class DomHandler {
 			if (this.#currentUserMode === 1) {
 				this.switchToNormalMode();
 				this.clearTodoTableContents();
-				console.log("You are on Normal mode.");
 			} else {
 				this.switchToEditMode();
-				console.log("You are on Edit mode.");
+				this.clearTodoTableContents();
 			}
 
-			// Render to todo items to edit mode or normal mode
+			this.initTodosTableItems();
+		});
+
+		this.delete_todo_btn.addEventListener("click", () => {
+			if (this.#currentUserMode === 2) {
+				this.switchToNormalMode();
+				this.clearTodoTableContents();
+			} else {
+				this.switchToDeletionMode();
+				this.clearTodoTableContents();
+			}
+
 			this.initTodosTableItems();
 		});
 	}
@@ -240,23 +274,18 @@ class DomHandler {
 				document.body.style.overflow = "";
 
 				// Render the updated item to UI
+				this.clearTodoTableContents();
 				this.initTodosTableItems();
-
-				console.log(`ToDo Item #${this.#target_todo_id} has been updated.`);
 			}
 		});
 	}
 
 	initTodosTableItems() {
-		if (this.#currentUserMode === 1 || this.#currentUserMode === 2) {
-			this.clearTodoTableContents();
-		}
-
 		if (TodoLocalStorageHandler.isTodosLocalExists()) {
 			const local_todos = TodoLocalStorageHandler.getTodosLocal();
 
 			if (local_todos.length <= 0)
-				return console.log("Local Todos is empty. No items to be rendered.");
+				return console.warn("Local Todos is empty. No items to be rendered.");
 
 			// Render Todo item to each table
 			for (let i = 0; i < local_todos.length; i++) {
@@ -266,7 +295,7 @@ class DomHandler {
 			// Add the event listener for each To Do Item
 			this.addEventListenerToEachToDoItems();
 		} else {
-			console.log("Local Todos does not exists");
+			console.warn("Local Todos does not exists");
 		}
 	}
 
@@ -277,7 +306,7 @@ class DomHandler {
 
 		for (let i = 0; i < statusCheckboxElements.length; i++) {
 			statusCheckboxElements[i].addEventListener("click", (e) => {
-				todoHandler.updateToDoItemStatus(
+				TodoLocalStorageHandler.updateTodosLocalItemStatus(
 					statusCheckboxElements[i].dataset.id,
 					e.target.checked
 				);
@@ -301,11 +330,30 @@ class DomHandler {
 		}
 	}
 
+	addEventListenerToToDoItemsDeleteBtn() {
+		const deleteTodoBtnElements = document.querySelectorAll(
+			`tr > td:first-child > button`
+		);
+
+		for (let i = 0; i < deleteTodoBtnElements.length; i++) {
+			deleteTodoBtnElements[i].addEventListener("click", () => {
+				const target_id = deleteTodoBtnElements[i].dataset.id;
+				TodoLocalStorageHandler.deleteTodoLocal(target_id);
+
+				// Re-render the todos table after deletion
+				this.clearTodoTableContents();
+				this.initTodosTableItems();
+			});
+		}
+	}
+
 	addEventListenerToEachToDoItems() {
 		if (this.#currentUserMode === 0) {
 			this.addEventListenerToToDoStatusCheckbox();
 		} else if (this.#currentUserMode === 1) {
 			this.addEventListenerToToDoItemsEditBtn();
+		} else {
+			this.addEventListenerToToDoItemsDeleteBtn();
 		}
 	}
 

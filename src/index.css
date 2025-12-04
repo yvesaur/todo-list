@@ -198,13 +198,23 @@ td > span.high {
 	color: var(--error);
 }
 
-.todos-table table .edit-todo-item-btn {
-	background-color: var(--tertiary-container);
-	color: var(--on-tertiary-container);
-	font-size: 1rem;
+.todos-table table .edit-todo-item-btn,
+.todos-table table .delete-todo-item-btn {
+	text-align: center;
+	font-size: 0.75rem;
 	padding: 0.25rem;
 	border-radius: 0.25rem;
 	box-shadow: var(--elevation-1);
+}
+
+.todos-table table .edit-todo-item-btn {
+	background-color: var(--tertiary-container);
+	color: var(--on-tertiary-container);
+}
+
+.todos-table table .delete-todo-item-btn {
+	background-color: var(--error-container);
+	color: var(--on-error-container);
 }
 
 footer {
