@@ -138,9 +138,10 @@
 				</div>
 			</div>
 
+			<!-- Adding a To Do -->
 			<dialog class="dialog-form add-todo-modal">
 				<form
-					class="add-todo-form"
+					class="todo-form add-todo"
 					action="dialog">
 					<h3>
 						<span class="material-symbols-outlined"> add_task </span>
@@ -199,7 +200,81 @@
 							class="primary-btn-1 add-btn">
 							<span class="material-symbols-outlined"> add </span
 							><span>Add</span></button
-						><button class="error-btn-2 cancel-btn">
+						><button
+							type="button"
+							class="error-btn-2 cancel-btn">
+							<span class="material-symbols-outlined"> cancel </span
+							><span>Cancel</span>
+						</button>
+					</div>
+				</form>
+			</dialog>
+
+			<!-- Editing a To Do item -->
+			<dialog class="dialog-form edit-todo-modal">
+				<form
+					class="todo-form edit-todo"
+					action="dialog">
+					<h3>
+						<span class="material-symbols-outlined"> add_task </span>
+						<span>Edit To Do</span>
+					</h3>
+					<fieldset>
+						<div>
+							<label for="name"
+								>Name<span style="color: var(--error)">*</span></label
+							><input
+								type="text"
+								name="name"
+								id="new_name"
+								placeholder="Task name"
+								required />
+						</div>
+						<div>
+							<label for="priority"
+								>Priority<span style="color: var(--error)">*</span></label
+							><select
+								name="priority"
+								id="new_priority"
+								required>
+								<option
+									value=""
+									disabled
+									selected>
+									Select a level of priority
+								</option>
+								<option value="high">High</option>
+								<option value="normal">Normal</option>
+								<option value="low">Low</option>
+							</select>
+						</div>
+						<div>
+							<label for="description">Description</label
+							><textarea
+								name="description"
+								id="new_description"
+								rows="6"
+								placeholder="..."></textarea>
+						</div>
+						<div>
+							<label for="due_date"
+								>Due Date<span style="color: var(--error)">*</span></label
+							><input
+								type="date"
+								name="due_date"
+								id="new_due_date"
+								required />
+						</div>
+					</fieldset>
+					<div class="form-btn-container">
+						<button
+							type="submit"
+							class="primary-btn-1 edit-btn">
+							<span class="material-symbols-outlined"> edit_square </span
+							><span>Update</span></button
+						><button
+							type="button"
+							class="error-btn-2 cancel-btn">
 							<span class="material-symbols-outlined"> cancel </span
 							><span>Cancel</span>
 						</button>

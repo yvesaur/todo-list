@@ -13,18 +13,7 @@ class TodoHandler {
 	addTodo(id, name, priority, due_date, description) {
 		this.#todos.push(new TodoItem(id, name, priority, due_date, description));
 
-		TodoLocalStorageHandler.addTodoLocal(this.#todos);
-	}
-
-	deleteTodo(todo_id) {
-		const target_index = this.#todos.findIndex((todo) => todo.id === todo_id);
-		if (target_index !== -1) this.#todos.splice(target_index, 1);
-
-		TodoLocalStorageHandler.deleteTodoLocal(todo_id);
-	}
-
-	getTodos() {
-		return this.#todos;
+		TodoLocalStorageHandler.updateTodosLocal(this.#todos);
 	}
 }
 
