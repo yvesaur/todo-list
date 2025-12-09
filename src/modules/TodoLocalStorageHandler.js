@@ -12,10 +12,6 @@ class TodoLocalStorageHandler {
 		}
 	}
 
-	static createTodosLocal() {
-		localStorage.setItem(this.TODOS_LOCAL_NAME, JSON.stringify([]));
-	}
-
 	isTodosLocalExists() {
 		return localStorage.hasOwnProperty(this.TODOS_LOCAL_NAME);
 	}
@@ -30,9 +26,13 @@ class TodoLocalStorageHandler {
 		return this.getTodosLocal(this.TODOS_LOCAL_NAME).length <= 0;
 	}
 
+	static createTodosLocal() {
+		localStorage.setItem(this.TODOS_LOCAL_NAME, JSON.stringify([]));
+	}
+
 	static getTodosLocal() {
-		const local_todos = JSON.parse(localStorage.getItem(this.TODOS_LOCAL_NAME));
-		return local_todos;
+		let local_todos = JSON.parse(localStorage.getItem(this.TODOS_LOCAL_NAME));
+		return this.sortToDoItems(local_todos);
 	}
 
 	static getSingleTodoLocal(todo_id) {
@@ -44,15 +44,6 @@ class TodoLocalStorageHandler {
 
 	static updateTodosLocal(updated_local_todos) {
 		localStorage.setItem("todos_local", JSON.stringify(updated_local_todos));
-	}
-
-	static deleteTodoLocal(todo_id) {
-		let local_todos = this.getTodosLocal();
-
-		const target_index = local_todos.findIndex((todo) => todo.id === todo_id);
-		if (target_index !== -1) local_todos.splice(target_index, 1);
-
-		this.updateTodosLocal(local_todos);
 	}
 
 	static updateTodosLocalItem(
@@ -84,6 +75,30 @@ class TodoLocalStorageHandler {
 		updated_local_todos[target_index].isDone = new_status;
 
 		this.updateTodosLocal(updated_local_todos);
+	}
+
+	static deleteTodoLocal(todo_id) {
+		let local_todos = this.getTodosLocal();
+
+		const target_index = local_todos.findIndex((todo) => todo.id === todo_id);
+		if (target_index !== -1) local_todos.splice(target_index, 1);
+
+		this.updateTodosLocal(local_todos);
+	}
+
+	static sortToDoItems(todos_data) {
+		const sorted_todos_by_date = this.sortTodoItemsByDate(todos_data);
+		return this.sortTodoItemsByCompletion(sorted_todos_by_date);
+	}
+
+	static sortTodoItemsByCompletion(todos_data) {
+		return todos_data.sort((a, b) => Number(a.isDone) - Number(b.isDone));
+	}
+
+	static sortTodoItemsByDate(todos_data) {
+		return todos_data.sort(
+			(a, b) => new Date(a.due_date) - new Date(b.due_date)
+		);
 	}
 }
 

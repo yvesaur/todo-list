@@ -74,6 +74,7 @@ class DomHandler {
 		if (this.#currentUserMode === 0) {
 			return `
 								<tr
+									${todo_data.isDone && 'class="completed"'}
 									data-id="${todo_data.id}"
 								>
 									<td>
@@ -82,7 +83,7 @@ class DomHandler {
 											type="checkbox"
 											name="isDone"
 											data-id="${todo_data.id}" 
-											${todo_data.isDone && "checked"}/>
+											${todo_data.isDone ? "checked" : ""}/>
 									</td>
 									<td>${todo_data.name}</td>
 									<td>
@@ -103,6 +104,7 @@ class DomHandler {
 		} else if (this.#currentUserMode === 1) {
 			return `
 								<tr
+									${todo_data.isDone && 'class="completed"'}
 									data-id="${todo_data.id}"
 								>
 									<td>
@@ -131,6 +133,7 @@ class DomHandler {
 		} else {
 			return `
 								<tr
+									${todo_data.isDone && 'class="completed"'}
 									data-id="${todo_data.id}"
 								>
 									<td>
@@ -233,11 +236,13 @@ class DomHandler {
 					todo_data.due_date,
 					todo_data.description
 				);
-				this.addTodoItemToTable(todo_data);
 
 				this.add_todo_modal_form.reset();
 				this.add_todo_modal.close();
 				document.body.style.overflow = "";
+
+				this.clearTodoTableContents();
+				this.initTodosTableItems();
 			}
 		});
 
@@ -299,6 +304,16 @@ class DomHandler {
 		}
 	}
 
+	addEventListenerToEachToDoItems() {
+		if (this.#currentUserMode === 0) {
+			this.addEventListenerToToDoStatusCheckbox();
+		} else if (this.#currentUserMode === 1) {
+			this.addEventListenerToToDoItemsEditBtn();
+		} else {
+			this.addEventListenerToToDoItemsDeleteBtn();
+		}
+	}
+
 	addEventListenerToToDoStatusCheckbox() {
 		const statusCheckboxElements = document.querySelectorAll(
 			`tr > td:first-child > input[type="checkbox"]`
@@ -310,6 +325,8 @@ class DomHandler {
 					statusCheckboxElements[i].dataset.id,
 					e.target.checked
 				);
+				this.clearTodoTableContents();
+				this.initTodosTableItems();
 			});
 		}
 	}
@@ -340,20 +357,9 @@ class DomHandler {
 				const target_id = deleteTodoBtnElements[i].dataset.id;
 				TodoLocalStorageHandler.deleteTodoLocal(target_id);
 
-				// Re-render the todos table after deletion
 				this.clearTodoTableContents();
 				this.initTodosTableItems();
 			});
-		}
-	}
-
-	addEventListenerToEachToDoItems() {
-		if (this.#currentUserMode === 0) {
-			this.addEventListenerToToDoStatusCheckbox();
-		} else if (this.#currentUserMode === 1) {
-			this.addEventListenerToToDoItemsEditBtn();
-		} else {
-			this.addEventListenerToToDoItemsDeleteBtn();
 		}
 	}
 
