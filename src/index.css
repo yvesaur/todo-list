@@ -60,6 +60,7 @@ body {
 
 main {
 	padding: 0 1rem;
+	position: relative;
 }
 
 main > h1 {
@@ -198,6 +199,18 @@ td > span.high {
 	color: var(--error);
 }
 
+.todos-table table > tbody tr:hover {
+	background-color: rgba(200, 197, 208, 0.5);
+}
+
+.todos-table table > tbody tr.completed {
+	background-color: rgba(200, 197, 208, 0.5);
+}
+
+.todos-table table > tbody tr.completed > td {
+	text-decoration: line-through;
+}
+
 .todos-table table .edit-todo-item-btn,
 .todos-table table .delete-todo-item-btn {
 	text-align: center;
@@ -234,6 +247,12 @@ footer {
 	align-items: center;
 	gap: 0.25rem;
 	font-weight: bold;
+}
+
+.change-theme-btn {
+	position: fixed;
+	left: 1rem;
+	bottom: 2.75rem;
 }
 
 /* Small Devices */

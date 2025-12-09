@@ -7,6 +7,7 @@ import "./index.css";
 import DomHandler from "./modules/DomHandler";
 import TodoHandler from "./modules/TodoHandler";
 import TodoLocalStorageHandler from "./modules/TodoLocalStorageHandler";
+import "./scripts/changeTheme";
 import "./scripts/form";
 
 const todoHandler = new TodoHandler();
