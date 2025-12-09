@@ -18,8 +18,4 @@ domHandler.initTodosTableItems();
 domHandler.initFABEventListeners();
 domHandler.initToDoFormEventListeners();
 
-window.todoHandler = todoHandler;
-window.TodoLocalStorageHandler = TodoLocalStorageHandler;
-window.domHandler = domHandler;
-
 export { domHandler, todoHandler };
